@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 import 'cognito_client_exceptions.dart';
 
@@ -9,20 +9,20 @@ class Client {
   String _userAgent = 'aws-amplify/0.0.x dart';
   String? _region;
   late String endpoint;
-  late http.Client _client;
+  late Dio _client;
 
   Client({
     String? endpoint,
     String? region,
     String service = 'AWSCognitoIdentityProviderService',
-    http.Client? client,
+    Dio? client,
     String? userAgent,
   }) {
     _region = region;
     _service = service;
     _userAgent = userAgent ?? _userAgent;
     this.endpoint = endpoint ?? 'https://cognito-idp.$_region.amazonaws.com/';
-    _client = client ?? http.Client();
+    _client = client ?? Dio();
   }
 
   /// Makes requests on AWS API service provider
@@ -38,12 +38,12 @@ class Client {
       'X-Amz-User-Agent': _userAgent,
     };
 
-    http.Response response;
+    Response response;
     try {
       response = await _client.post(
-        Uri.parse(endpointReq),
-        headers: headersReq,
-        body: body,
+        endpointReq,
+        options: Options(headers: headersReq),
+        data: body,
       );
     } catch (e) {
       if (e.toString().contains('Failed host lookup:')) {
@@ -52,22 +52,28 @@ class Client {
           code: 'NetworkError',
         );
       }
+
+      if (e is DioException) {
+        throw CognitoClientException.fromDioException(e);
+      }
+
       throw CognitoClientException('Unknown Error', code: 'Unknown error');
     }
 
     dynamic data;
 
     try {
-      data = json.decode(utf8.decode(response.bodyBytes));
+      data = json.decode(response.data);
     } catch (_) {
       // expect json
     }
 
-    if (response.statusCode < 200 || response.statusCode > 299) {
+    if (response.statusCode != null &&
+        (response.statusCode! < 200 || response.statusCode! > 299)) {
       var errorType = 'UnknownError';
-      for (final header in response.headers.keys) {
+      for (final header in response.headers.map.keys) {
         if (header.toLowerCase() == 'x-amzn-errortype') {
-          errorType = response.headers[header]!.split(':')[0];
+          errorType = response.headers[header]![0].split(':')[0];
           break;
         }
       }

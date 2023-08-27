@@ -1,134 +1,127 @@
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
-/// This exception is thrown when a verification code fails to deliver successfully.
-final codeDeliveryFailureException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'CodeDeliveryFailureException',
+final codeDeliveryFailureException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['CodeDeliveryFailureException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when Amazon Cognito encounters an internal error.
-final internalErrorException = http.Response(
-  '{"message":"Mocked error message"}',
-  500,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'InternalErrorException',
+final internalErrorException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 500,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['InternalErrorException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when Amazon Cognito is not allowed to use your email identity.
-final invalidEmailRoleAccessPolicyException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'InvalidEmailRoleAccessPolicyException',
+final invalidEmailRoleAccessPolicyException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['InvalidEmailRoleAccessPolicyException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when the Amazon Cognito service encounters an invalid AWS Lambda response.
-final invalidLambdaResponseException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'InvalidLambdaResponseException',
+final invalidLambdaResponseException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['InvalidLambdaResponseException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when the Amazon Cognito service encounters an invalid AWS Lambda response.
-final invalidParameterException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'InvalidParameterException',
+final invalidParameterException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['InvalidParameterException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when the Amazon Cognito service encounters an invalid password.
-final invalidPasswordException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'InvalidPasswordException',
+final invalidPasswordException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['InvalidPasswordException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is returned when the role provided for SMS configuration does not have permission to
-/// publish using Amazon SNS.
-final invalidSmsRoleAccessPolicyException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'InvalidSmsRoleAccessPolicyException',
+final invalidSmsRoleAccessPolicyException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['InvalidSmsRoleAccessPolicyException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when the trust relationship is invalid for the role provided for
-/// SMS configuration. This can happen if you do not trust cognito-idp.amazonaws.com or the
-/// external ID provided in the role does not match what is provided in the SMS configuration
-/// for the user pool.
-final invalidSmsRoleTrustRelationshipException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'InvalidSmsRoleTrustRelationshipException',
+final invalidSmsRoleTrustRelationshipException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['InvalidSmsRoleTrustRelationshipException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when a user is not authorized.
-final notAuthorizedException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'NotAuthorizedException',
+final notAuthorizedException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['NotAuthorizedException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when the Amazon Cognito service cannot find the requested resource.
-final resourceNotFoundException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'ResourceNotFoundException',
+final resourceNotFoundException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['ResourceNotFoundException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when the user has made too many requests for a given operation.
-final tooManyRequestsException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'TooManyRequestsException',
+final tooManyRequestsException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['TooManyRequestsException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when the Amazon Cognito service encounters an unexpected
-/// exception with the AWS Lambda service.
-final unexpectedLambdaException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'UnexpectedLambdaException',
+final unexpectedLambdaException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['UnexpectedLambdaException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when the Amazon Cognito service encounters a user validation
-/// exception with the AWS Lambda service.
-final userLambdaValidationException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'UserLambdaValidationException',
+final userLambdaValidationException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['UserLambdaValidationException'],
   }),
+  requestOptions: RequestOptions(),
 );
 
-/// This exception is thrown when Amazon Cognito encounters a user name that
-/// already exists in the user pool
-final usernameExistsException = http.Response(
-  '{"message":"Mocked error message"}',
-  400,
-  headers: Map<String, String>.from({
-    'x-amzn-ErrorType': 'UsernameExistsException',
+final usernameExistsException = Response(
+  data: '{"message":"Mocked error message"}',
+  statusCode: 400,
+  headers: Headers.fromMap({
+    'x-amzn-ErrorType': ['UsernameExistsException'],
   }),
+  requestOptions: RequestOptions(),
 );

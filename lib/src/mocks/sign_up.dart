@@ -1,4 +1,4 @@
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 export './exceptions.dart'
     show
@@ -18,8 +18,8 @@ export './exceptions.dart'
 
 /// A response from the server indicating that a user registration
 /// has been confirmed.
-final successfulConfirmedSignUp = http.Response(
-  '''{
+final successfulConfirmedSignUp = Response(
+  data: '''{
     "CodeDeliveryDetails": {
       "AttributeName": "string",
       "DeliveryMedium": "SMS",
@@ -28,16 +28,17 @@ final successfulConfirmedSignUp = http.Response(
     "UserConfirmed": true,
     "UserSub": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
   }''',
-  200,
-  headers: Map<String, String>.from({
-    'Content-Type': 'application/json',
+  statusCode: 200,
+  headers: Headers.fromMap({
+    'Content-Type': ['application/json'],
   }),
+  requestOptions: RequestOptions(),
 );
 
 /// A response from the server indicating that a user registration
 /// has not been confirmed.
-final successfulUnconfirmedSignUp = http.Response(
-  '''{
+final successfulUnconfirmedSignUp = Response(
+  data: '''{
     "CodeDeliveryDetails": {
       "AttributeName": "string",
       "DeliveryMedium": "SMS",
@@ -46,8 +47,9 @@ final successfulUnconfirmedSignUp = http.Response(
     "UserConfirmed": false,
     "UserSub": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
   }''',
-  200,
-  headers: Map<String, String>.from({
-    'Content-Type': 'application/json',
+  statusCode: 200,
+  headers: Headers.fromMap({
+    'Content-Type': ['application/json'],
   }),
+  requestOptions: RequestOptions(),
 );
